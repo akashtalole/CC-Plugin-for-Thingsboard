@@ -1,0 +1,147 @@
+{
+  "ruleChain": {
+    "name": "Smart Agriculture Rule Chain",
+    "type": "CORE",
+    "firstRuleNodeIndex": 0,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "id": {"entityType": "RULE_NODE", "id": "1a2b3c4d-5e6f-4780-9a1b-2c3d4e5f6a7b"},
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Input",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {},
+        "additionalInfo": {
+          "layoutX": 50,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "2b3c4d5e-6f7a-4891-ab2c-3d4e5f6a7b8c"},
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Field Sensor Data",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "3c4d5e6f-7a8b-4902-bc3d-4e5f6a7b8c9d"},
+        "type": "org.thingsboard.rule.engine.profile.TbDeviceProfileNode",
+        "name": "Device Profile Node",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "persistAlarmRulesState": false,
+          "fetchAlarmRulesStateOnStart": false
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "4d5e6f7a-8b9c-4013-cd4e-5f6a7b8c9d0e"},
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Field Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": "",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "dynamicSeverity": false,
+          "propagateRelationTypes": []
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 50,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "5e6f7a8b-9c0d-4124-de5f-6a7b8c9d0e1f"},
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Field Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": ""
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 200,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "6f7a8b9c-0d1e-4235-ef6a-7b8c9d0e1f2a"},
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check Irrigation Needed",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return msg.containsKey('soilMoisture') && msg.soilMoisture < 35;"
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 300,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "7a8b9c0d-1e2f-4346-fa7b-8c9d0e1f2a3b"},
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Field Events",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return 'Incoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 300,
+          "description": ""
+        }
+      }
+    ],
+    "connections": [
+      {"fromIndex": 0, "toIndex": 1, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 2, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 5, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 2, "toIndex": 3, "type": "Alarm Created"},
+      {"fromIndex": 2, "toIndex": 4, "type": "Alarm Cleared"},
+      {"fromIndex": 2, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 5, "toIndex": 6, "type": "True"},
+      {"fromIndex": 5, "toIndex": 6, "type": "False"},
+      {"fromIndex": 3, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 4, "toIndex": 6, "type": "Failure"}
+    ],
+    "ruleChainConnections": null
+  }
+}

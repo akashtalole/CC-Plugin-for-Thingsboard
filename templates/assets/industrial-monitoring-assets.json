@@ -1,0 +1,104 @@
+{
+  "assets": [
+    {
+      "name": "Factory Site A",
+      "type": "Factory",
+      "label": "Primary Factory Site",
+      "additionalInfo": {
+        "description": "Root factory asset — top-level container for all production lines and machines"
+      }
+    },
+    {
+      "name": "Assembly Line 1",
+      "type": "ProductionLine",
+      "label": "Production Line 1",
+      "additionalInfo": {
+        "description": "First assembly line at Factory Site A",
+        "parentAssetName": "Factory Site A"
+      }
+    },
+    {
+      "name": "Assembly Line 2",
+      "type": "ProductionLine",
+      "label": "Production Line 2",
+      "additionalInfo": {
+        "description": "Second assembly line at Factory Site A",
+        "parentAssetName": "Factory Site A"
+      }
+    },
+    {
+      "name": "CNC Machine 01",
+      "type": "Machine",
+      "label": "CNC Machine 01",
+      "additionalInfo": {
+        "description": "CNC machining center on Assembly Line 1",
+        "parentAssetName": "Assembly Line 1"
+      }
+    },
+    {
+      "name": "Robot Arm 01",
+      "type": "Machine",
+      "label": "Robot Arm 01",
+      "additionalInfo": {
+        "description": "Articulated robot arm on Assembly Line 1",
+        "parentAssetName": "Assembly Line 1"
+      }
+    },
+    {
+      "name": "CNC Machine 02",
+      "type": "Machine",
+      "label": "CNC Machine 02",
+      "additionalInfo": {
+        "description": "CNC machining center on Assembly Line 2",
+        "parentAssetName": "Assembly Line 2"
+      }
+    },
+    {
+      "name": "Conveyor 01",
+      "type": "Machine",
+      "label": "Conveyor 01",
+      "additionalInfo": {
+        "description": "Belt conveyor system on Assembly Line 2",
+        "parentAssetName": "Assembly Line 2"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": {"name": "Factory Site A", "type": "Factory"},
+      "to": {"name": "Assembly Line 1", "type": "ProductionLine"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Factory Site A", "type": "Factory"},
+      "to": {"name": "Assembly Line 2", "type": "ProductionLine"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Assembly Line 1", "type": "ProductionLine"},
+      "to": {"name": "CNC Machine 01", "type": "Machine"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Assembly Line 1", "type": "ProductionLine"},
+      "to": {"name": "Robot Arm 01", "type": "Machine"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Assembly Line 2", "type": "ProductionLine"},
+      "to": {"name": "CNC Machine 02", "type": "Machine"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Assembly Line 2", "type": "ProductionLine"},
+      "to": {"name": "Conveyor 01", "type": "Machine"},
+      "relationType": "Contains"
+    }
+  ],
+  "importNote": "Import assets in order listed. Then create relations using POST /api/relation",
+  "importInstructions": [
+    "1. Create each asset in the order listed using: POST /api/asset with header X-Authorization: Bearer $TB_API_KEY",
+    "2. After all assets are created, query each asset by name using: GET /api/tenant/assets?textSearch=<name>&pageSize=10&page=0 to retrieve its assigned ID",
+    "3. Create each relation using POST /api/relation with the following body: {\"from\": {\"id\": \"<parent-id>\", \"entityType\": \"ASSET\"}, \"to\": {\"id\": \"<child-id>\", \"entityType\": \"ASSET\"}, \"type\": \"Contains\", \"typeGroup\": \"COMMON\"}"
+  ]
+}

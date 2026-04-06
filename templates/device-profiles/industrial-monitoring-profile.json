@@ -1,0 +1,349 @@
+{
+  "name": "Industrial Machine",
+  "type": "DEFAULT",
+  "transportType": "MQTT",
+  "provisionType": "DISABLED",
+  "description": "MQTT device profile for industrial machine monitoring with vibration, temperature, voltage, pressure, and OEE tracking",
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "MqttDeviceProfileTransportConfiguration",
+      "deviceTelemetryTopic": "v1/devices/me/telemetry",
+      "deviceAttributesTopic": "v1/devices/me/attributes",
+      "sparkplug": false,
+      "sendAckOnValidationException": false
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED"
+    },
+    "alarms": [
+      {
+        "id": "3ae1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+        "alarmType": "High Vibration",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "vibration"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 10,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "vibration"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 7,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "4bf2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+        "alarmType": "Machine Overheat",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "temperature"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 85,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "temperature"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 75,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "5ca3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
+        "alarmType": "Voltage Surge",
+        "createRules": {
+          "MAJOR": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "voltage"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 250,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "voltage"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 240,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "6db4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
+        "alarmType": "Low Pressure",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "pressure"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 2,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "pressure"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 3,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "7ec5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
+        "alarmType": "Maintenance Due",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "runHours"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 1000,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "runHours"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 10,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      }
+    ]
+  }
+}

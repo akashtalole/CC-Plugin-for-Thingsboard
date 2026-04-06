@@ -1,0 +1,229 @@
+{
+  "title": "Smart Agriculture Dashboard",
+  "configuration": {
+    "description": "",
+    "widgets": {
+      "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d": {
+        "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Soil Moisture",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+              "dataKeys": [
+                {
+                  "name": "soilMoisture",
+                  "type": "timeseries",
+                  "label": "Soil Moisture",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "%"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e": {
+        "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Soil Temperature",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+              "dataKeys": [
+                {
+                  "name": "soilTemperature",
+                  "type": "timeseries",
+                  "label": "Soil Temperature",
+                  "color": "#ff9800",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "°C"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f": {
+        "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Soil pH",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+              "dataKeys": [
+                {
+                  "name": "soilPH",
+                  "type": "timeseries",
+                  "label": "Soil pH",
+                  "color": "#4caf50",
+                  "settings": {},
+                  "decimals": 2,
+                  "units": "pH"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a": {
+        "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Air Humidity",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+              "dataKeys": [
+                {
+                  "name": "airHumidity",
+                  "type": "timeseries",
+                  "label": "Air Humidity",
+                  "color": "#9c27b0",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "%"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      }
+    },
+    "entityAliases": {
+      "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e": {
+        "id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+        "alias": "fieldSensors",
+        "filter": {
+          "type": "deviceSearchQuery",
+          "resolveMultiple": true,
+          "deviceTypes": ["Agricultural Field Sensor"]
+        }
+      }
+    },
+    "filters": {},
+    "timewindow": {
+      "displayValue": "",
+      "selectedTab": 0,
+      "realtime": {
+        "realtimeType": 1,
+        "interval": 1000,
+        "timewindowMs": 60000,
+        "quickInterval": "CURRENT_DAY"
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": false,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    },
+    "states": {
+      "default": {
+        "name": "Default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d": {
+                "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e": {
+                "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 6
+              },
+              "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f": {
+                "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 12
+              },
+              "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a": {
+                "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 18
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#eeeeee",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false,
+              "mobileAutoFillHeight": false,
+              "mobileRowHeight": 70
+            }
+          }
+        }
+      }
+    }
+  }
+}

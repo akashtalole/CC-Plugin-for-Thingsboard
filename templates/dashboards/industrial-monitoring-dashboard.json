@@ -1,0 +1,229 @@
+{
+  "title": "Industrial Machine Monitor",
+  "configuration": {
+    "description": "",
+    "widgets": {
+      "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f": {
+        "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Vibration",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "dataKeys": [
+                {
+                  "name": "vibration",
+                  "type": "timeseries",
+                  "label": "Vibration",
+                  "color": "#f44336",
+                  "settings": {},
+                  "decimals": 2,
+                  "units": "mm/s"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a": {
+        "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Machine Temperature",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "dataKeys": [
+                {
+                  "name": "temperature",
+                  "type": "timeseries",
+                  "label": "Machine Temperature",
+                  "color": "#ff9800",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "°C"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b": {
+        "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Voltage",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "dataKeys": [
+                {
+                  "name": "voltage",
+                  "type": "timeseries",
+                  "label": "Voltage",
+                  "color": "#9c27b0",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "V"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c": {
+        "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Run Hours",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "dataKeys": [
+                {
+                  "name": "runHours",
+                  "type": "timeseries",
+                  "label": "Run Hours",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "hrs"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      }
+    },
+    "entityAliases": {
+      "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d": {
+        "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+        "alias": "industrialMachines",
+        "filter": {
+          "type": "deviceSearchQuery",
+          "resolveMultiple": true,
+          "deviceTypes": ["Industrial Machine"]
+        }
+      }
+    },
+    "filters": {},
+    "timewindow": {
+      "displayValue": "",
+      "selectedTab": 0,
+      "realtime": {
+        "realtimeType": 1,
+        "interval": 1000,
+        "timewindowMs": 60000,
+        "quickInterval": "CURRENT_DAY"
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": false,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    },
+    "states": {
+      "default": {
+        "name": "Default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f": {
+                "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a": {
+                "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 6
+              },
+              "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b": {
+                "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 12
+              },
+              "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c": {
+                "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 18
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#eeeeee",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false,
+              "mobileAutoFillHeight": false,
+              "mobileRowHeight": 70
+            }
+          }
+        }
+      }
+    }
+  }
+}

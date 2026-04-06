@@ -1,0 +1,147 @@
+{
+  "ruleChain": {
+    "name": "Fleet Tracking Rule Chain",
+    "type": "CORE",
+    "firstRuleNodeIndex": 0,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "id": {"entityType": "RULE_NODE", "id": "11223344-5566-4778-8990-aabbccddeeff"},
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Input",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {},
+        "additionalInfo": {
+          "layoutX": 50,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "22334455-6677-4889-9001-bbccddeeff00"},
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Vehicle Telemetry",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "33445566-7788-4990-a112-ccddeeff0011"},
+        "type": "org.thingsboard.rule.engine.profile.TbDeviceProfileNode",
+        "name": "Device Profile Node",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "persistAlarmRulesState": false,
+          "fetchAlarmRulesStateOnStart": false
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "44556677-8899-4001-b223-ddeeff001122"},
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Vehicle Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": "",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "dynamicSeverity": false,
+          "propagateRelationTypes": []
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 50,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "55667788-9900-4112-c334-eeff00112233"},
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Vehicle Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": ""
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 200,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "66778899-0011-4223-d445-ff0011223344"},
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check Telemetry Type",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return msgType == 'POST_TELEMETRY_REQUEST';"
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 300,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "7788990a-1122-4334-e556-001122334455"},
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Failure",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return 'Incoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 300,
+          "description": ""
+        }
+      }
+    ],
+    "connections": [
+      {"fromIndex": 0, "toIndex": 1, "type": "Success"},
+      {"fromIndex": 0, "toIndex": 5, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 2, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 2, "toIndex": 3, "type": "Alarm Created"},
+      {"fromIndex": 2, "toIndex": 4, "type": "Alarm Cleared"},
+      {"fromIndex": 2, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 5, "toIndex": 1, "type": "True"},
+      {"fromIndex": 5, "toIndex": 6, "type": "False"},
+      {"fromIndex": 3, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 4, "toIndex": 6, "type": "Failure"}
+    ],
+    "ruleChainConnections": null
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "ruleChain": {
+    "name": "Smart Building Rule Chain",
+    "type": "CORE",
+    "firstRuleNodeIndex": 0,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "id": {"entityType": "RULE_NODE", "id": "a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7"},
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Input",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {},
+        "additionalInfo": {
+          "layoutX": 50,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "b2c3d4e5-f6a7-4890-b1c2-d3e4f5a6b7c8"},
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "c3d4e5f6-a7b8-4901-c2d3-e4f5a6b7c8d9"},
+        "type": "org.thingsboard.rule.engine.profile.TbDeviceProfileNode",
+        "name": "Device Profile Node",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "persistAlarmRulesState": false,
+          "fetchAlarmRulesStateOnStart": false
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "d4e5f6a7-b8c9-4012-d3e4-f5a6b7c8d9e0"},
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Device Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": "",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "dynamicSeverity": false,
+          "propagateRelationTypes": []
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 50,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "e5f6a7b8-c9d0-4123-e4f5-a6b7c8d9e0f1"},
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Device Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": ""
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 200,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "f6a7b8c9-d0e1-4234-f5a6-b7c8d9e0f1a2"},
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Failure",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return 'Incoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 300,
+          "description": ""
+        }
+      }
+    ],
+    "connections": [
+      {"fromIndex": 0, "toIndex": 1, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 2, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 5, "type": "Failure"},
+      {"fromIndex": 2, "toIndex": 3, "type": "Alarm Created"},
+      {"fromIndex": 2, "toIndex": 4, "type": "Alarm Cleared"},
+      {"fromIndex": 2, "toIndex": 5, "type": "Failure"},
+      {"fromIndex": 3, "toIndex": 5, "type": "Failure"},
+      {"fromIndex": 4, "toIndex": 5, "type": "Failure"}
+    ],
+    "ruleChainConnections": null
+  }
+}
