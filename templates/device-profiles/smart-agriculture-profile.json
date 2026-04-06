@@ -1,0 +1,349 @@
+{
+  "name": "Agricultural Field Sensor",
+  "type": "DEFAULT",
+  "transportType": "MQTT",
+  "provisionType": "DISABLED",
+  "description": "MQTT device profile for smart agriculture monitoring soil conditions, weather, and irrigation systems",
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "MqttDeviceProfileTransportConfiguration",
+      "deviceTelemetryTopic": "v1/devices/me/telemetry",
+      "deviceAttributesTopic": "v1/devices/me/attributes",
+      "sparkplug": false,
+      "sendAckOnValidationException": false
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED"
+    },
+    "alarms": [
+      {
+        "id": "8fd6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+        "alarmType": "Low Soil Moisture",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "soilMoisture"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 30,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "soilMoisture"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 40,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "90e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
+        "alarmType": "High Soil Moisture",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "soilMoisture"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 80,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "soilMoisture"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 75,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "a1f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
+        "alarmType": "Frost Risk",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "soilTemperature"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 2,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "soilTemperature"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 5,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "b209b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
+        "alarmType": "Low Soil pH",
+        "createRules": {
+          "MAJOR": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "soilPH"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 5.5,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "soilPH"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 6.0,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "c31ac1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
+        "alarmType": "High Soil pH",
+        "createRules": {
+          "MAJOR": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "soilPH"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 7.5,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "soilPH"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 7.0,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      }
+    ]
+  }
+}

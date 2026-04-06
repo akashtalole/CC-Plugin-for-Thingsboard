@@ -1,0 +1,104 @@
+{
+  "assets": [
+    {
+      "name": "Green Valley Farm",
+      "type": "Farm",
+      "label": "Green Valley Farm",
+      "additionalInfo": {
+        "description": "Root farm asset — top-level container for all fields and monitoring zones"
+      }
+    },
+    {
+      "name": "North Field",
+      "type": "Field",
+      "label": "North Agricultural Field",
+      "additionalInfo": {
+        "description": "Northern crop field at Green Valley Farm",
+        "parentAssetName": "Green Valley Farm"
+      }
+    },
+    {
+      "name": "South Field",
+      "type": "Field",
+      "label": "South Agricultural Field",
+      "additionalInfo": {
+        "description": "Southern crop field at Green Valley Farm",
+        "parentAssetName": "Green Valley Farm"
+      }
+    },
+    {
+      "name": "Zone A",
+      "type": "Zone",
+      "label": "North Field Zone A",
+      "additionalInfo": {
+        "description": "Irrigation and sensor zone A within North Field",
+        "parentAssetName": "North Field"
+      }
+    },
+    {
+      "name": "Zone B",
+      "type": "Zone",
+      "label": "North Field Zone B",
+      "additionalInfo": {
+        "description": "Irrigation and sensor zone B within North Field",
+        "parentAssetName": "North Field"
+      }
+    },
+    {
+      "name": "Zone C",
+      "type": "Zone",
+      "label": "South Field Zone C",
+      "additionalInfo": {
+        "description": "Irrigation and sensor zone C within South Field",
+        "parentAssetName": "South Field"
+      }
+    },
+    {
+      "name": "Zone D",
+      "type": "Zone",
+      "label": "South Field Zone D",
+      "additionalInfo": {
+        "description": "Irrigation and sensor zone D within South Field",
+        "parentAssetName": "South Field"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": {"name": "Green Valley Farm", "type": "Farm"},
+      "to": {"name": "North Field", "type": "Field"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Green Valley Farm", "type": "Farm"},
+      "to": {"name": "South Field", "type": "Field"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "North Field", "type": "Field"},
+      "to": {"name": "Zone A", "type": "Zone"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "North Field", "type": "Field"},
+      "to": {"name": "Zone B", "type": "Zone"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "South Field", "type": "Field"},
+      "to": {"name": "Zone C", "type": "Zone"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "South Field", "type": "Field"},
+      "to": {"name": "Zone D", "type": "Zone"},
+      "relationType": "Contains"
+    }
+  ],
+  "importNote": "Import assets in order listed. Then create relations using POST /api/relation",
+  "importInstructions": [
+    "1. Create each asset in the order listed using: POST /api/asset with header X-Authorization: Bearer $TB_API_KEY",
+    "2. After all assets are created, query each asset by name using: GET /api/tenant/assets?textSearch=<name>&pageSize=10&page=0 to retrieve its assigned ID",
+    "3. Create each relation using POST /api/relation with the following body: {\"from\": {\"id\": \"<parent-id>\", \"entityType\": \"ASSET\"}, \"to\": {\"id\": \"<child-id>\", \"entityType\": \"ASSET\"}, \"type\": \"Contains\", \"typeGroup\": \"COMMON\"}"
+  ]
+}

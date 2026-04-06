@@ -1,0 +1,104 @@
+{
+  "assets": [
+    {
+      "name": "Main Fleet",
+      "type": "Fleet",
+      "label": "Primary Fleet",
+      "additionalInfo": {
+        "description": "Root fleet asset — top-level container for all vehicle groups and vehicles"
+      }
+    },
+    {
+      "name": "Delivery Trucks",
+      "type": "VehicleGroup",
+      "label": "Delivery Truck Group",
+      "additionalInfo": {
+        "description": "Group of delivery trucks operating under Main Fleet",
+        "parentAssetName": "Main Fleet"
+      }
+    },
+    {
+      "name": "Company Cars",
+      "type": "VehicleGroup",
+      "label": "Company Car Group",
+      "additionalInfo": {
+        "description": "Group of company cars operating under Main Fleet",
+        "parentAssetName": "Main Fleet"
+      }
+    },
+    {
+      "name": "Truck Alpha",
+      "type": "Vehicle",
+      "label": "Delivery Truck Alpha",
+      "additionalInfo": {
+        "description": "Heavy-duty delivery truck — unit 1 of Delivery Trucks group",
+        "parentAssetName": "Delivery Trucks"
+      }
+    },
+    {
+      "name": "Truck Beta",
+      "type": "Vehicle",
+      "label": "Delivery Truck Beta",
+      "additionalInfo": {
+        "description": "Heavy-duty delivery truck — unit 2 of Delivery Trucks group",
+        "parentAssetName": "Delivery Trucks"
+      }
+    },
+    {
+      "name": "Car 001",
+      "type": "Vehicle",
+      "label": "Company Car 001",
+      "additionalInfo": {
+        "description": "Company passenger car — unit 1 of Company Cars group",
+        "parentAssetName": "Company Cars"
+      }
+    },
+    {
+      "name": "Car 002",
+      "type": "Vehicle",
+      "label": "Company Car 002",
+      "additionalInfo": {
+        "description": "Company passenger car — unit 2 of Company Cars group",
+        "parentAssetName": "Company Cars"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": {"name": "Main Fleet", "type": "Fleet"},
+      "to": {"name": "Delivery Trucks", "type": "VehicleGroup"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Main Fleet", "type": "Fleet"},
+      "to": {"name": "Company Cars", "type": "VehicleGroup"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Delivery Trucks", "type": "VehicleGroup"},
+      "to": {"name": "Truck Alpha", "type": "Vehicle"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Delivery Trucks", "type": "VehicleGroup"},
+      "to": {"name": "Truck Beta", "type": "Vehicle"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Company Cars", "type": "VehicleGroup"},
+      "to": {"name": "Car 001", "type": "Vehicle"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Company Cars", "type": "VehicleGroup"},
+      "to": {"name": "Car 002", "type": "Vehicle"},
+      "relationType": "Contains"
+    }
+  ],
+  "importNote": "Import assets in order listed. Then create relations using POST /api/relation",
+  "importInstructions": [
+    "1. Create each asset in the order listed using: POST /api/asset with header X-Authorization: Bearer $TB_API_KEY",
+    "2. After all assets are created, query each asset by name using: GET /api/tenant/assets?textSearch=<name>&pageSize=10&page=0 to retrieve its assigned ID",
+    "3. Create each relation using POST /api/relation with the following body: {\"from\": {\"id\": \"<parent-id>\", \"entityType\": \"ASSET\"}, \"to\": {\"id\": \"<child-id>\", \"entityType\": \"ASSET\"}, \"type\": \"Contains\", \"typeGroup\": \"COMMON\"}"
+  ]
+}

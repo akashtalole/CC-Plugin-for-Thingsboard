@@ -1,0 +1,284 @@
+{
+  "name": "Fleet Vehicle",
+  "type": "DEFAULT",
+  "transportType": "MQTT",
+  "provisionType": "DISABLED",
+  "description": "MQTT device profile for fleet vehicle tracking with GPS, speed, fuel, and engine monitoring",
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "MqttDeviceProfileTransportConfiguration",
+      "deviceTelemetryTopic": "v1/devices/me/telemetry",
+      "deviceAttributesTopic": "v1/devices/me/attributes",
+      "sparkplug": false,
+      "sendAckOnValidationException": false
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED"
+    },
+    "alarms": [
+      {
+        "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+        "alarmType": "Over Speed",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "speed"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 120,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "speed"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 100,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "07b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+        "alarmType": "Low Fuel Level",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "fuelLevel"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 15,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "fuelLevel"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 20,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "18c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+        "alarmType": "Engine Overheat",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "engineTemp"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 100,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "engineTemp"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 90,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "29d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+        "alarmType": "Harsh Braking",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "acceleration"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": -4,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "acceleration"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": -2,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      }
+    ]
+  }
+}

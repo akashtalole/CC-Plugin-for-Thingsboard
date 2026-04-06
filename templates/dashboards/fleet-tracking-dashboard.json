@@ -1,0 +1,229 @@
+{
+  "title": "Fleet Tracking Dashboard",
+  "configuration": {
+    "description": "",
+    "widgets": {
+      "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b": {
+        "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Speed",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d",
+              "dataKeys": [
+                {
+                  "name": "speed",
+                  "type": "timeseries",
+                  "label": "Speed",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "km/h"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c": {
+        "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Fuel Level",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d",
+              "dataKeys": [
+                {
+                  "name": "fuelLevel",
+                  "type": "timeseries",
+                  "label": "Fuel Level",
+                  "color": "#4caf50",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "%"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d": {
+        "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Engine Temperature",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d",
+              "dataKeys": [
+                {
+                  "name": "engineTemp",
+                  "type": "timeseries",
+                  "label": "Engine Temperature",
+                  "color": "#f44336",
+                  "settings": {},
+                  "decimals": 1,
+                  "units": "°C"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      },
+      "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e": {
+        "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+        "typeFullFqn": "system.cards.simple-card",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 3,
+        "minResizeW": 2,
+        "minResizeH": 2,
+        "config": {
+          "title": "Latitude",
+          "showTitle": true,
+          "backgroundColor": "#fff",
+          "color": "rgba(0,0,0,0.87)",
+          "padding": "8px",
+          "settings": {},
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d",
+              "dataKeys": [
+                {
+                  "name": "latitude",
+                  "type": "timeseries",
+                  "label": "Latitude",
+                  "color": "#ff9800",
+                  "settings": {},
+                  "decimals": 6,
+                  "units": "°"
+                }
+              ]
+            }
+          ],
+          "actions": {}
+        }
+      }
+    },
+    "entityAliases": {
+      "a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d": {
+        "id": "a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d",
+        "alias": "fleetVehicles",
+        "filter": {
+          "type": "deviceSearchQuery",
+          "resolveMultiple": true,
+          "deviceTypes": ["Fleet Vehicle"]
+        }
+      }
+    },
+    "filters": {},
+    "timewindow": {
+      "displayValue": "",
+      "selectedTab": 0,
+      "realtime": {
+        "realtimeType": 1,
+        "interval": 1000,
+        "timewindowMs": 60000,
+        "quickInterval": "CURRENT_DAY"
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": false,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    },
+    "states": {
+      "default": {
+        "name": "Default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b": {
+                "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c": {
+                "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 6
+              },
+              "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d": {
+                "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 12
+              },
+              "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e": {
+                "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 18
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#eeeeee",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false,
+              "mobileAutoFillHeight": false,
+              "mobileRowHeight": 70
+            }
+          }
+        }
+      }
+    }
+  }
+}

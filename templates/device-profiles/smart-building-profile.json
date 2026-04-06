@@ -1,0 +1,349 @@
+{
+  "name": "Smart Building Sensor",
+  "type": "DEFAULT",
+  "transportType": "MQTT",
+  "provisionType": "DISABLED",
+  "description": "MQTT device profile for smart building sensors monitoring temperature, humidity, CO2, and energy consumption",
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "MqttDeviceProfileTransportConfiguration",
+      "deviceTelemetryTopic": "v1/devices/me/telemetry",
+      "deviceAttributesTopic": "v1/devices/me/attributes",
+      "sparkplug": false,
+      "sendAckOnValidationException": false
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED"
+    },
+    "alarms": [
+      {
+        "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+        "alarmType": "High Temperature",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "temperature"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 30,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "temperature"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 25,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+        "alarmType": "Low Temperature",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "temperature"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 15,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "temperature"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 18,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+        "alarmType": "High Humidity",
+        "createRules": {
+          "WARNING": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "humidity"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 80,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "humidity"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 75,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+        "alarmType": "High CO2 Level",
+        "createRules": {
+          "MAJOR": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "co2"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 1000,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "co2"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 800,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+        "alarmType": "Power Outage",
+        "createRules": {
+          "CRITICAL": {
+            "schedule": {
+              "type": "ANY_TIME"
+            },
+            "condition": {
+              "spec": {
+                "type": "SIMPLE"
+              },
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "energy"
+                  },
+                  "valueType": "NUMERIC",
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null
+                    },
+                    "dynamicValue": null
+                  }
+                }
+              ]
+            },
+            "alarmDetails": ""
+          }
+        },
+        "clearRule": {
+          "schedule": {
+            "type": "ANY_TIME"
+          },
+          "condition": {
+            "spec": {
+              "type": "SIMPLE"
+            },
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "energy"
+                },
+                "valueType": "NUMERIC",
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null
+                  },
+                  "dynamicValue": null
+                }
+              }
+            ]
+          }
+        },
+        "propagate": false,
+        "propagateRelationTypes": null
+      }
+    ]
+  }
+}

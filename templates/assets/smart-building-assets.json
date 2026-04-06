@@ -1,0 +1,104 @@
+{
+  "assets": [
+    {
+      "name": "Smart Building HQ",
+      "type": "Building",
+      "label": "Headquarters",
+      "additionalInfo": {
+        "description": "Main headquarters building — root asset for the smart building hierarchy"
+      }
+    },
+    {
+      "name": "Floor 1",
+      "type": "Floor",
+      "label": "Ground Floor",
+      "additionalInfo": {
+        "description": "First floor of Smart Building HQ",
+        "parentAssetName": "Smart Building HQ"
+      }
+    },
+    {
+      "name": "Floor 2",
+      "type": "Floor",
+      "label": "Second Floor",
+      "additionalInfo": {
+        "description": "Second floor of Smart Building HQ",
+        "parentAssetName": "Smart Building HQ"
+      }
+    },
+    {
+      "name": "Room 101",
+      "type": "Room",
+      "label": "Conference Room A",
+      "additionalInfo": {
+        "description": "Conference room on Floor 1",
+        "parentAssetName": "Floor 1"
+      }
+    },
+    {
+      "name": "Room 102",
+      "type": "Room",
+      "label": "Open Office A",
+      "additionalInfo": {
+        "description": "Open office space on Floor 1",
+        "parentAssetName": "Floor 1"
+      }
+    },
+    {
+      "name": "Room 201",
+      "type": "Room",
+      "label": "Conference Room B",
+      "additionalInfo": {
+        "description": "Conference room on Floor 2",
+        "parentAssetName": "Floor 2"
+      }
+    },
+    {
+      "name": "Room 202",
+      "type": "Room",
+      "label": "Open Office B",
+      "additionalInfo": {
+        "description": "Open office space on Floor 2",
+        "parentAssetName": "Floor 2"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": {"name": "Smart Building HQ", "type": "Building"},
+      "to": {"name": "Floor 1", "type": "Floor"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Smart Building HQ", "type": "Building"},
+      "to": {"name": "Floor 2", "type": "Floor"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Floor 1", "type": "Floor"},
+      "to": {"name": "Room 101", "type": "Room"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Floor 1", "type": "Floor"},
+      "to": {"name": "Room 102", "type": "Room"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Floor 2", "type": "Floor"},
+      "to": {"name": "Room 201", "type": "Room"},
+      "relationType": "Contains"
+    },
+    {
+      "from": {"name": "Floor 2", "type": "Floor"},
+      "to": {"name": "Room 202", "type": "Room"},
+      "relationType": "Contains"
+    }
+  ],
+  "importNote": "Import assets in order listed. Then create relations using POST /api/relation",
+  "importInstructions": [
+    "1. Create each asset in the order listed using: POST /api/asset with header X-Authorization: Bearer $TB_API_KEY",
+    "2. After all assets are created, query each asset by name using: GET /api/tenant/assets?textSearch=<name>&pageSize=10&page=0 to retrieve its assigned ID",
+    "3. Create each relation using POST /api/relation with the following body: {\"from\": {\"id\": \"<parent-id>\", \"entityType\": \"ASSET\"}, \"to\": {\"id\": \"<child-id>\", \"entityType\": \"ASSET\"}, \"type\": \"Contains\", \"typeGroup\": \"COMMON\"}"
+  ]
+}

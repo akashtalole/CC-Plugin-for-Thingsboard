@@ -1,0 +1,147 @@
+{
+  "ruleChain": {
+    "name": "Industrial Monitoring Rule Chain",
+    "type": "CORE",
+    "firstRuleNodeIndex": 0,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "id": {"entityType": "RULE_NODE", "id": "aa112233-4455-4667-8899-001122334455"},
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Input",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {},
+        "additionalInfo": {
+          "layoutX": 50,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "bb223344-5566-4778-9900-112233445566"},
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Machine Telemetry",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "cc334455-6677-4889-a011-223344556677"},
+        "type": "org.thingsboard.rule.engine.profile.TbDeviceProfileNode",
+        "name": "Device Profile Node",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "persistAlarmRulesState": false,
+          "fetchAlarmRulesStateOnStart": false
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 100,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "dd445566-7788-4990-b122-334455667788"},
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Machine Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": "",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "dynamicSeverity": false,
+          "propagateRelationTypes": []
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 50,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "ee556677-8899-4001-c233-445566778899"},
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear Alarm",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmType": "Machine Alarm",
+          "alarmDetailsBuildJs": "",
+          "alarmDetailsBuildTbel": ""
+        },
+        "additionalInfo": {
+          "layoutX": 650,
+          "layoutY": 200,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "ff667788-9900-4112-d344-556677889900"},
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check Run Hours Threshold",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return msg.containsKey('runHours') && msg.runHours > 900;"
+        },
+        "additionalInfo": {
+          "layoutX": 250,
+          "layoutY": 300,
+          "description": ""
+        }
+      },
+      {
+        "id": {"entityType": "RULE_NODE", "id": "00778899-a011-4223-e455-667788990011"},
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Events",
+        "debugMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "",
+          "tbelScript": "return 'Incoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 450,
+          "layoutY": 300,
+          "description": ""
+        }
+      }
+    ],
+    "connections": [
+      {"fromIndex": 0, "toIndex": 1, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 2, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 5, "type": "Success"},
+      {"fromIndex": 1, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 2, "toIndex": 3, "type": "Alarm Created"},
+      {"fromIndex": 2, "toIndex": 4, "type": "Alarm Cleared"},
+      {"fromIndex": 2, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 5, "toIndex": 6, "type": "True"},
+      {"fromIndex": 5, "toIndex": 6, "type": "False"},
+      {"fromIndex": 3, "toIndex": 6, "type": "Failure"},
+      {"fromIndex": 4, "toIndex": 6, "type": "Failure"}
+    ],
+    "ruleChainConnections": null
+  }
+}
